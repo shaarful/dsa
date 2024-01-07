@@ -27,6 +27,11 @@ class HashTable:
             if element[0] == key:
                 return element[1]
 
+    def print_all(self):
+        for a in self.arr:
+            for b in a:
+                print(f"{b[0]}: {b[1]}")
+
     def __getitem__(self, key):
         return self.get(key)
 
@@ -35,16 +40,31 @@ class HashTable:
 
     def __delitem__(self, key):
         h = self.get_hash(key)
-        self.arr[h] = None
+        for idx, element in enumerate(self.arr[h]):
+            if element[0] == key:
+                del self.arr[h][idx]
 
 
 if __name__ == '__main__':
-    ht = HashTable()
-    ht.add('march 6', 130)
-    ht.add('march 7', 135)
-    ht['march 8'] = 140
-    ht['march 17'] = 999
-    # print(ht.get_hash("march 17"))
-    print(ht['march 6'])
-    print(ht['march 8'])
-    print(ht['march 17'])
+    # ht = HashTable()
+    # ht.add('march 6', 130)
+    # ht.add('march 7', 135)
+    # ht['march 8'] = 140
+    # ht['march 17'] = "fds"
+    # # print(ht.get_hash("march 17"))
+    # print(ht['march 6'])
+    # print(ht['march 8'])
+    # print(ht['march 17'])
+    # print(type(ht['march 17']))
+    # print(ht['march 17'])
+    wc = HashTable()
+    with open("data/poem.txt") as file:
+        for line in file:
+            words = line.split()
+            for word in words:
+                if not wc[word]:
+                    wc[word] = 0
+                    # print(word)
+                wc[word] += 1
+                # print(type(wc[word]))
+    wc.print_all()
