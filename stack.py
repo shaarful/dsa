@@ -48,18 +48,43 @@ class Stack:
 
 def is_balanced(s: str) -> bool:
     stack = Stack()
+    open_first = 0
+    open_second = 0
+    open_third = 0
     for c in s:
-        stack.push(c)
-        print(stack.peek())
+        #     stack.push(c)
+        # b = stack.is_empty()
+        # print(b)
+        # while not stack.is_empty():
+        #     a = stack.peek()
+        a = c
+        if a == '(':
+            open_first += 1
+        elif a == ')':
+            open_first -= 1
+        elif a == '{':
+            open_second += 1
+        elif a == '}':
+            open_second -= 1
+        elif a == '[':
+            open_third += 1
+        elif a == ']':
+            open_third -= 1
 
-    return False
+        if open_first < 0 or open_second < 0 or open_third < 0:
+            return False
+    if open_first != 0 or open_second != 0 or open_third != 0:
+        return False
+    # print(stack.peek())
+
+    return True
 
 
-is_balanced("({a+b})")
-is_balanced("))((a+b}{")
-is_balanced("((a+b))")
-is_balanced("))")
-is_balanced("[a+b]*(x+2y)*{gg+kk}")
+print(is_balanced("({a+b})"))
+print(is_balanced("))((a+b}{"))
+print(is_balanced("((a+b))"))
+print(is_balanced("))"))
+print(is_balanced("[a+b]*(x+2y)*{gg+kk}"))
 
 a = Stack()
 print(a.reverse_string("We will conquere COVID-19"))
